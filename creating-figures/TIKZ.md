@@ -373,6 +373,22 @@ Solution: Use relative positioning consistently, define spacing as variables:
 \node[block, right=\blocksep of prev] (next) {...};
 ```
 
+### Container Labels and Inner Block Spacing
+
+When a container box has a label at the top, inner blocks must leave enough space below the label. Use consistent spacing for all similar containers:
+
+```latex
+% Container with label
+\node[roundbox, minimum width=1.4cm] (round1) {};
+\node[roundlabel, anchor=north] at ([yshift=-1pt]round1.north) {Round 1};
+
+% Inner block needs sufficient offset from container top to avoid label
+\node[opblock, below=0.35cm of round1.north] (sbox1) {S-box};  % Good: 0.35cm
+% NOT: below=0.25cm of round1.north  % Bad: may overlap with label
+```
+
+Ensure all similar containers use the same offset value for consistency.
+
 ### Arrow Alignment
 
 Solution: Use anchors explicitly:
